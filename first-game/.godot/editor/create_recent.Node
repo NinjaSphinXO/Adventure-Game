@@ -1,2 +1,9 @@
-AnimatedSprite2D
+ColorRect
+Label
+CanvasLayer
 AudioStreamPlayer2D
+BoxContainer
+Container
+Timer
+ProgressBar
+AnimatedSprite2D

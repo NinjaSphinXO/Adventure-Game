@@ -1,10 +1,30 @@
-[gd_scene load_steps=30 format=3 uid="uid://d1nof71rgomqi"]
+[gd_scene load_steps=37 format=3 uid="uid://d1nof71rgomqi"]
 
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_h1g66"]
+[ext_resource type="Script" path="res://Scenes/health_bar.gd" id="2_0wagt"]
 [ext_resource type="Texture2D" uid="uid://ddxgwgq6jjv1l" path="res://Main Characters/Ninja Frog/Idle (32x32).png" id="2_pg7my"]
 [ext_resource type="AudioStream" uid="uid://cjqfbq5kut7x5" path="res://Sounds/jump.mp3" id="3_1qisw"]
 [ext_resource type="Texture2D" uid="uid://bbrug10qobekl" path="res://Main Characters/Ninja Frog/Run (32x32).png" id="3_atuh4"]
+[ext_resource type="AudioStream" uid="uid://43k6uyrswa53" path="res://Sounds/hit.wav" id="3_hacbd"]
+[ext_resource type="AudioStream" uid="uid://dht2kfqfj4qwv" path="res://Sounds/die.wav" id="3_pklnq"]
 [ext_resource type="Texture2D" uid="uid://ddxusyr8bctv4" path="res://Main Characters/Ninja Frog/Jump (32x32).png" id="3_uoolo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7nkxp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j76po"]
+bg_color = Color(0.939049, 0, 0.086112, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ev5kd"]
+bg_color = Color(0.147672, 0.147672, 0.147672, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.27451)
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtvmi"]
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pqgnv"]
 atlas = ExtResource("2_pg7my")
@@ -191,12 +211,86 @@ animations = [{
 [node name="Player" type="Node2D"]
 script = ExtResource("1_h1g66")
 
-[node name="PlayerAnimation" type="AnimatedSprite2D" parent="."]
-position = Vector2(100, 305)
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_uxbjl")
-animation = &"jump"
+[node name="HealthBar" type="ProgressBar" parent="."]
+z_index = 1
+offset_left = 7.0
+offset_top = 16.0
+offset_right = 247.0
+offset_bottom = 26.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_7nkxp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_j76po")
+value = 60.0
+show_percentage = false
+script = ExtResource("2_0wagt")
+
+[node name="DamageBar" type="ProgressBar" parent="HealthBar"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_ev5kd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qtvmi")
+value = 80.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="HealthBar"]
+wait_time = 0.4
+one_shot = true
+
+[node name="DieSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_pklnq")
+volume_db = -10.0
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_hacbd")
+volume_db = -10.0
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_1qisw")
 volume_db = -10.0
+
+[node name="PlayerAnimation" type="BoxContainer" parent="."]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 178.0
+offset_top = -73.0
+offset_right = 178.0
+offset_bottom = -73.0
+grow_vertical = 2
+
+[node name="PlayerAnimation" type="AnimatedSprite2D" parent="PlayerAnimation"]
+position = Vector2(28, 678)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_uxbjl")
+animation = &"jump"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DarkOverlay" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.568627)
+
+[node name="GameOver" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -172.0
+offset_top = -41.5
+offset_right = 172.0
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "Game Over"
+uppercase = true
+
+[connection signal="timeout" from="HealthBar/Timer" to="HealthBar" method="_on_timer_timeout"]
