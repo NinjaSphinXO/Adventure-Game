@@ -11,8 +11,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("right"):
 		velocity.x = 400
+		$PlayerIdle.flip_h = false
 	elif Input.is_action_pressed("left"):
 		velocity.x = -400
+		$PlayerIdle.flip_h = true
 	else:
 		velocity.x = 0 
 
