@@ -9,23 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://dht2kfqfj4qwv" path="res://Sounds/die.wav" id="3_pklnq"]
 [ext_resource type="Texture2D" uid="uid://ddxusyr8bctv4" path="res://Main Characters/Ninja Frog/Jump (32x32).png" id="3_uoolo"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7nkxp"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j76po"]
-bg_color = Color(0.939049, 0, 0.086112, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ev5kd"]
-bg_color = Color(0.147672, 0.147672, 0.147672, 1)
-expand_margin_left = 1.0
-expand_margin_top = 1.0
-expand_margin_right = 1.0
-expand_margin_bottom = 1.0
-shadow_color = Color(0, 0, 0, 0.27451)
-shadow_offset = Vector2(0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtvmi"]
-bg_color = Color(1, 1, 1, 1)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_pqgnv"]
 atlas = ExtResource("2_pg7my")
 region = Rect2(0, 0, 32, 32)
@@ -208,49 +191,25 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7nkxp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j76po"]
+bg_color = Color(0.939049, 0, 0.086112, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ev5kd"]
+bg_color = Color(0.147672, 0.147672, 0.147672, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.27451)
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtvmi"]
+bg_color = Color(1, 1, 1, 1)
+
 [node name="Player" type="Node2D"]
 script = ExtResource("1_h1g66")
-
-[node name="HealthBar" type="ProgressBar" parent="."]
-z_index = 1
-offset_left = 7.0
-offset_top = 16.0
-offset_right = 247.0
-offset_bottom = 26.0
-theme_override_styles/background = SubResource("StyleBoxEmpty_7nkxp")
-theme_override_styles/fill = SubResource("StyleBoxFlat_j76po")
-value = 60.0
-show_percentage = false
-script = ExtResource("2_0wagt")
-
-[node name="DamageBar" type="ProgressBar" parent="HealthBar"]
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_ev5kd")
-theme_override_styles/fill = SubResource("StyleBoxFlat_qtvmi")
-value = 80.0
-show_percentage = false
-
-[node name="Timer" type="Timer" parent="HealthBar"]
-wait_time = 0.4
-one_shot = true
-
-[node name="DieSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_pklnq")
-volume_db = -10.0
-
-[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_hacbd")
-volume_db = -10.0
-
-[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_1qisw")
-volume_db = -10.0
 
 [node name="PlayerAnimation" type="BoxContainer" parent="."]
 anchors_preset = 9
@@ -267,17 +226,51 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_uxbjl")
 animation = &"jump"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Camera2D" type="Camera2D" parent="PlayerAnimation/PlayerAnimation"]
+position = Vector2(0, -120)
 
-[node name="DarkOverlay" type="ColorRect" parent="CanvasLayer"]
+[node name="HealthBar" type="ProgressBar" parent="PlayerAnimation/PlayerAnimation"]
+z_index = 1
+offset_left = -313.5
+offset_top = -294.5
+offset_right = -73.5
+offset_bottom = -284.5
+theme_override_styles/background = SubResource("StyleBoxEmpty_7nkxp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_j76po")
+value = 60.0
+show_percentage = false
+script = ExtResource("2_0wagt")
+
+[node name="DamageBar" type="ProgressBar" parent="PlayerAnimation/PlayerAnimation/HealthBar"]
+z_index = -1
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.568627)
+theme_override_styles/background = SubResource("StyleBoxFlat_ev5kd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qtvmi")
+value = 80.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="PlayerAnimation/PlayerAnimation/HealthBar"]
+wait_time = 0.4
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DarkOverlay" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.956863)
 
 [node name="GameOver" type="Label" parent="CanvasLayer"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -293,4 +286,19 @@ theme_override_font_sizes/font_size = 60
 text = "Game Over"
 uppercase = true
 
-[connection signal="timeout" from="HealthBar/Timer" to="HealthBar" method="_on_timer_timeout"]
+[node name="DieSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_pklnq")
+volume_db = -10.0
+mix_target = 2
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_hacbd")
+volume_db = -10.0
+mix_target = 2
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1qisw")
+volume_db = -10.0
+mix_target = 2
+
+[connection signal="timeout" from="PlayerAnimation/PlayerAnimation/HealthBar/Timer" to="PlayerAnimation/PlayerAnimation/HealthBar" method="_on_timer_timeout"]

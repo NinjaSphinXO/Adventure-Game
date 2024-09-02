@@ -9,7 +9,7 @@ var health: int = 100
 var is_dead: = false
 
 @onready var player_animation = $PlayerAnimation/PlayerAnimation
-@onready var health_bar = $HealthBar
+@onready var health_bar = $PlayerAnimation/PlayerAnimation/HealthBar
 @onready var game_over_label = $CanvasLayer/GameOver
 @onready var dark_overlay = $CanvasLayer/DarkOverlay
 
@@ -69,6 +69,7 @@ func _process(delta: float) -> void:
 		is_jumping = false
 	else:
 		is_on_ground = false
+	
 
 func show_game_over() -> void:
 	is_dead = true
@@ -88,6 +89,8 @@ func show_game_over() -> void:
 	timer.connect("timeout", Callable(self, "_on_timeout"))  # Use Callable for connecting signals
 	add_child(timer)
 	timer.start()
+	
+	
 
 func _on_timeout() -> void:
 	get_tree().reload_current_scene()

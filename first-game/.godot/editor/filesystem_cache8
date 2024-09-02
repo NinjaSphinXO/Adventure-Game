@@ -1,11 +1,12 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1725288903
+::res://::1725291665
 icon.svg::CompressedTexture2D::687537331386455341::1725283068::1725283143::1::::<><>::
 ::res://Background/::1725283144
 BG.jpg::CompressedTexture2D::55362376516304851::1725283068::1725283144::1::::<><>::
-::res://Main Characters/::1725283144
+::res://Main Characters/::1725291657
 Appearing (96x96).png::CompressedTexture2D::7080184839926108901::1725283068::1725283144::1::::<><>::
 Desappearing (96x96).png::CompressedTexture2D::3566228940981585281::1725283068::1725283144::1::::<><>::
+Double Jump (32x32).png::CompressedTexture2D::3771876225858831688::1725283068::1725291657::1::::<><>::
 ::res://Main Characters/Mask Dude/::1725283144
 Double Jump (32x32).png::CompressedTexture2D::4654563216289341220::1725283068::1725283144::1::::<><>::
 Fall (32x32).png::CompressedTexture2D::1800701533414744014::1725283068::1725283144::1::::<><>::
@@ -14,8 +15,7 @@ Idle (32x32).png::CompressedTexture2D::8304048849761281020::1725283068::17252831
 Jump (32x32).png::CompressedTexture2D::7398850292874956947::1725283068::1725283144::1::::<><>::
 Run (32x32).png::CompressedTexture2D::1212338306884398561::1725283068::1725283144::1::::<><>::
 Wall Jump (32x32).png::CompressedTexture2D::6198714307887549011::1725283068::1725283144::1::::<><>::
-::res://Main Characters/Ninja Frog/::1725283144
-Double Jump (32x32).png::CompressedTexture2D::3771876225858831688::1725283068::1725283144::1::::<><>::
+::res://Main Characters/Ninja Frog/::1725291662
 Fall (32x32).png::CompressedTexture2D::8966732071758030164::1725283068::1725283144::1::::<><>::
 Hit (32x32).png::CompressedTexture2D::4366049867776264148::1725283068::1725283144::1::::<><>::
 Idle (32x32).png::CompressedTexture2D::7417713201037157259::1725283068::1725283144::1::::<><>::
@@ -38,12 +38,12 @@ Idle (32x32).png::CompressedTexture2D::5659367139540776945::1725283068::17252831
 Jump (32x32).png::CompressedTexture2D::5801177295638900885::1725283068::1725283144::1::::<><>::
 Run (32x32).png::CompressedTexture2D::9209289154442241793::1725283068::1725283144::1::::<><>::
 Wall Jump (32x32).png::CompressedTexture2D::2245796137180024908::1725283068::1725283144::1::::<><>::
-::res://Scenes/::1725289348
-level.tscn::PackedScene::1556310044338932737::1725289348::0::1::::<><>::uid://122swf3a0xb::::res://Background/BG.jpg<>uid://d1nof71rgomqi::::res://Scenes/player.tscn
-player.gd::GDScript::-1::1725289348::0::1::::<>Node2D<>::
-player.tscn::PackedScene::9011869585032281544::1725289348::0::1::::<><>::res://Scenes/player.gd<>res://Scenes/health_bar.gd<>uid://ddxgwgq6jjv1l::::res://Main Characters/Ninja Frog/Idle (32x32).png<>uid://cjqfbq5kut7x5::::res://Sounds/jump.mp3<>uid://bbrug10qobekl::::res://Main Characters/Ninja Frog/Run (32x32).png<>uid://43k6uyrswa53::::res://Sounds/hit.wav<>uid://ddxusyr8bctv4::::res://Main Characters/Ninja Frog/Jump (32x32).png
+::res://Scenes/::1725291649
 health_bar.gd::GDScript::-1::1725287470::0::1::::<>ProgressBar<>::
-::res://Sounds/::1725289526
-die.wav::AudioStreamWAV::7691464638190393689::1725289512::1725289529::1::::<><>::
+level.tscn::PackedScene::1556310044338932737::1725291547::0::1::::<><>::uid://122swf3a0xb::::res://Background/BG.jpg<>uid://d1nof71rgomqi::::res://Scenes/player.tscn
+player.gd::GDScript::-1::1725291355::0::1::::<>Node2D<>::
+player.tscn::PackedScene::9011869585032281544::1725291649::0::1::::<><>::res://Scenes/player.gd<>res://Scenes/health_bar.gd<>uid://ddxgwgq6jjv1l::::res://Main Characters/Ninja Frog/Idle (32x32).png<>uid://bbrug10qobekl::::res://Main Characters/Ninja Frog/Run (32x32).png<>uid://ddxusyr8bctv4::::res://Main Characters/Ninja Frog/Jump (32x32).png
+::res://Sounds/::1725291665
+die.wav::AudioStreamWAV::7691464638190393689::1725289512::1725291665::1::::<><>::
 hit.wav::AudioStreamWAV::2093942660494960136::1725289145::1725289176::1::::<><>::
 jump.mp3::AudioStreamMP3::5437877262150787524::1725283068::1725283143::1::::<><>::
