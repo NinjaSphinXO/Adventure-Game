@@ -18,6 +18,7 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_pressed("jump") and is_on_ground:
 		velocity.y = jump_force
+		$JumpSound.play()
 	
 	# Apply gravity
 	velocity.y += gravity * delta

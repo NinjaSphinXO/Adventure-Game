@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://d1nof71rgomqi"]
+[gd_scene load_steps=16 format=3 uid="uid://d1nof71rgomqi"]
 
 [ext_resource type="Texture2D" uid="uid://dqksqa3ylxioy" path="res://Main Characters/Mask Dude/Idle (32x32).png" id="1_batr2"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_h1g66"]
+[ext_resource type="AudioStream" uid="uid://cjqfbq5kut7x5" path="res://Sounds/jump.mp3" id="3_1qisw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_loy27"]
 atlas = ExtResource("1_batr2")
@@ -97,3 +98,7 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_uxbjl")
 autoplay = "default"
 frame_progress = 0.714399
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_1qisw")
+volume_db = -10.0
