@@ -7,6 +7,7 @@ var is_on_ground: bool = false
 var is_jumping: bool = false
 var health: int = 100
 var is_dead: = false
+var is_hit: = false
 
 @onready var player_animation = $PlayerAnimation/PlayerAnimation
 @onready var health_bar = $PlayerAnimation/PlayerAnimation/HealthBar
@@ -27,14 +28,14 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("right"):
 		player_animation.position += Vector2(1, 0) * 400 * delta
 		player_animation.flip_h = false
-		if not is_jumping:
+		if not is_jumping and not is_hit:
 			player_animation.play("move")
 	elif Input.is_action_pressed("left"):
 		player_animation.position += Vector2(1, 0) * -400 * delta
 		player_animation.flip_h = true
-		if not is_jumping:
+		if not is_jumping and not is_hit:
 			player_animation.play("move")
-	elif not is_jumping:
+	elif not is_jumping and not is_hit:
 		velocity.x = 0
 		player_animation.play("idle")
 		
@@ -46,8 +47,16 @@ func _process(delta: float) -> void:
 
 	# Testing health decrease with the "H" key
 	if Input.is_action_just_pressed("H"):
+		is_hit = true
 		health -= 10
+		var timer2 = Timer.new()
+		timer2.wait_time = 0.2
+		timer2.one_shot = true
+		timer2.connect("timeout", Callable(self, "_on_timeout2"))  # Use Callable for connecting signals
+		add_child(timer2)
+		timer2.start()
 		health_bar._set_health(health)
+		player_animation.play("hit")
 		$HitSound.play()
 
 	# Check if health is 0 or below
@@ -94,3 +103,6 @@ func show_game_over() -> void:
 
 func _on_timeout() -> void:
 	get_tree().reload_current_scene()
+
+func _on_timeout2() -> void:
+	is_hit = false

@@ -1,13 +1,42 @@
-[gd_scene load_steps=37 format=3 uid="uid://d1nof71rgomqi"]
+[gd_scene load_steps=45 format=3 uid="uid://d1nof71rgomqi"]
 
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_h1g66"]
 [ext_resource type="Script" path="res://Scenes/health_bar.gd" id="2_0wagt"]
+[ext_resource type="Texture2D" uid="uid://b3g7g6f1yrdfw" path="res://Main Characters/Ninja Frog/Hit (32x32).png" id="2_ihk3y"]
 [ext_resource type="Texture2D" uid="uid://ddxgwgq6jjv1l" path="res://Main Characters/Ninja Frog/Idle (32x32).png" id="2_pg7my"]
 [ext_resource type="AudioStream" uid="uid://cjqfbq5kut7x5" path="res://Sounds/jump.mp3" id="3_1qisw"]
 [ext_resource type="Texture2D" uid="uid://bbrug10qobekl" path="res://Main Characters/Ninja Frog/Run (32x32).png" id="3_atuh4"]
 [ext_resource type="AudioStream" uid="uid://43k6uyrswa53" path="res://Sounds/hit.wav" id="3_hacbd"]
 [ext_resource type="AudioStream" uid="uid://dht2kfqfj4qwv" path="res://Sounds/die.wav" id="3_pklnq"]
 [ext_resource type="Texture2D" uid="uid://ddxusyr8bctv4" path="res://Main Characters/Ninja Frog/Jump (32x32).png" id="3_uoolo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l35ol"]
+atlas = ExtResource("2_ihk3y")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbhno"]
+atlas = ExtResource("2_ihk3y")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sup5x"]
+atlas = ExtResource("2_ihk3y")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pafxf"]
+atlas = ExtResource("2_ihk3y")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ugme"]
+atlas = ExtResource("2_ihk3y")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfc4c"]
+atlas = ExtResource("2_ihk3y")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qw3im"]
+atlas = ExtResource("2_ihk3y")
+region = Rect2(192, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pqgnv"]
 atlas = ExtResource("2_pg7my")
@@ -103,6 +132,32 @@ region = Rect2(352, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uxbjl"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l35ol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbhno")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sup5x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pafxf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ugme")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfc4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qw3im")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 20.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pqgnv")
@@ -224,7 +279,7 @@ grow_vertical = 2
 position = Vector2(28, 678)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_uxbjl")
-animation = &"jump"
+animation = &"hit"
 
 [node name="Camera2D" type="Camera2D" parent="PlayerAnimation/PlayerAnimation"]
 position = Vector2(0, -120)
