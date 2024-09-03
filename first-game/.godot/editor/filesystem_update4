@@ -1,7 +1,10 @@
-res://Scenes/player.tscn
 res://Scenes/level.tscn
+res://Scenes/player.gd
+res://Scenes/player.tscn
 res://Scenes/health_bar.tscn
 res://Scenes/game_over.tscn
 res://Scenes/game_manager.gd
-res://Scenes/player.gd
-res://global.gd
+res://Scenes/p1.gd
+res://Scenes/kill_zone.gd
+res://Scenes/kill_zone.tscn
+res://Scenes/health_bar.gd

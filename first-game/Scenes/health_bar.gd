@@ -1,7 +1,6 @@
 extends ProgressBar
 
-
-var health = 0
+var health: int
 
 func _set_health(new_health):
 	var prev_health = health
