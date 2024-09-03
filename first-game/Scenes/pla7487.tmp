@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://d1nof71rgomqi"]
+[gd_scene load_steps=43 format=3 uid="uid://d1nof71rgomqi"]
 
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_h1g66"]
 [ext_resource type="Texture2D" uid="uid://b3g7g6f1yrdfw" path="res://Main Characters/Ninja Frog/Hit (32x32).png" id="2_ihk3y"]
@@ -6,7 +6,11 @@
 [ext_resource type="AudioStream" uid="uid://cjqfbq5kut7x5" path="res://Sounds/jump.mp3" id="3_1qisw"]
 [ext_resource type="Texture2D" uid="uid://bbrug10qobekl" path="res://Main Characters/Ninja Frog/Run (32x32).png" id="3_atuh4"]
 [ext_resource type="AudioStream" uid="uid://43k6uyrswa53" path="res://Sounds/hit.wav" id="3_hacbd"]
+[ext_resource type="AudioStream" uid="uid://dht2kfqfj4qwv" path="res://Sounds/die.wav" id="3_pklnq"]
 [ext_resource type="Texture2D" uid="uid://ddxusyr8bctv4" path="res://Main Characters/Ninja Frog/Jump (32x32).png" id="3_uoolo"]
+[ext_resource type="PackedScene" uid="uid://dahvw8pt35vyq" path="res://Scenes/health_bar.tscn" id="6_eskpq"]
+[ext_resource type="PackedScene" uid="uid://bqrtnce3hxrfg" path="res://Scenes/game_over.tscn" id="10_o3im2"]
+[ext_resource type="Script" path="res://Scenes/game_manager.gd" id="11_14w6s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l35ol"]
 atlas = ExtResource("2_ihk3y")
@@ -245,26 +249,47 @@ animations = [{
 }]
 
 [node name="Player" type="Node2D"]
+script = ExtResource("1_h1g66")
 
-[node name="JumpSound" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-stream = ExtResource("3_1qisw")
-volume_db = -10.0
-mix_target = 2
+[node name="PlayerAnimation" type="BoxContainer" parent="."]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 178.0
+offset_top = -73.0
+offset_right = 178.0
+offset_bottom = -73.0
+grow_vertical = 2
 
-[node name="HitSound" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-stream = ExtResource("3_hacbd")
-volume_db = -10.0
-mix_target = 2
-
-[node name="PlayerAnimation" type="AnimatedSprite2D" parent="."]
-unique_name_in_owner = true
+[node name="PlayerAnimation" type="AnimatedSprite2D" parent="PlayerAnimation"]
 position = Vector2(28, 678)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_uxbjl")
 animation = &"idle"
-script = ExtResource("1_h1g66")
 
-[node name="Camera2D" type="Camera2D" parent="PlayerAnimation"]
+[node name="Camera2D" type="Camera2D" parent="PlayerAnimation/PlayerAnimation"]
 position = Vector2(0, -120)
+
+[node name="HealthBar" parent="PlayerAnimation/PlayerAnimation" instance=ExtResource("6_eskpq")]
+unique_name_in_owner = true
+
+[node name="DieSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_pklnq")
+volume_db = -10.0
+mix_target = 2
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_hacbd")
+volume_db = -10.0
+mix_target = 2
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1qisw")
+volume_db = -10.0
+mix_target = 2
+
+[node name="GameOver" parent="." instance=ExtResource("10_o3im2")]
+unique_name_in_owner = true
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("11_14w6s")

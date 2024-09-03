@@ -1,3 +1,7 @@
 res://Scenes/player.tscn
-res://Scenes/player.gd
 res://Scenes/level.tscn
+res://Scenes/health_bar.tscn
+res://Scenes/game_over.tscn
+res://Scenes/game_manager.gd
+res://Scenes/player.gd
+res://global.gd

@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://wf5g1dqmy5jx"]
+[gd_scene load_steps=7 format=3 uid="uid://wf5g1dqmy5jx"]
 
 [ext_resource type="Texture2D" uid="uid://122swf3a0xb" path="res://Background/BG.jpg" id="1_33wwg"]
 [ext_resource type="PackedScene" uid="uid://d1nof71rgomqi" path="res://Scenes/player.tscn" id="1_naepg"]
+[ext_resource type="PackedScene" uid="uid://bqrtnce3hxrfg" path="res://Scenes/game_over.tscn" id="3_jgjf5"]
+[ext_resource type="Script" path="res://Scenes/game_manager.gd" id="4_ge5b8"]
+[ext_resource type="PackedScene" uid="uid://dahvw8pt35vyq" path="res://Scenes/health_bar.tscn" id="5_lymir"]
+[ext_resource type="AudioStream" uid="uid://dht2kfqfj4qwv" path="res://Sounds/die.wav" id="6_dcpj7"]
 
 [node name="Level" type="Node2D"]
 
@@ -11,3 +15,23 @@ scale = Vector2(2.73137, 2.65444)
 texture = ExtResource("1_33wwg")
 
 [node name="Player" parent="." instance=ExtResource("1_naepg")]
+unique_name_in_owner = true
+
+[node name="GameOver" parent="." instance=ExtResource("3_jgjf5")]
+unique_name_in_owner = true
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("4_ge5b8")
+
+[node name="DieSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_dcpj7")
+volume_db = -10.0
+mix_target = 2
+
+[node name="HealthBar" parent="." instance=ExtResource("5_lymir")]
+unique_name_in_owner = true
+offset_left = -598.0
+offset_top = 103.0
+offset_right = -214.0
+offset_bottom = 119.0

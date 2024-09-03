@@ -1,3 +1,5 @@
+# player.gd
+
 extends Node2D
 
 var velocity = Vector2()
@@ -5,24 +7,19 @@ var gravity: float = 2000
 var jump_force: float = -800
 var is_on_ground: bool = false
 var is_jumping: bool = false
-var health: int = 100
-var is_dead: = false
-var is_hit: = false
+var is_hit: bool = false
 
-@onready var player_animation = $PlayerAnimation/PlayerAnimation
-@onready var health_bar = $PlayerAnimation/PlayerAnimation/HealthBar
-@onready var game_over_label = $CanvasLayer/GameOver
-@onready var dark_overlay = $CanvasLayer/DarkOverlay
+@onready var player_animation: AnimatedSprite2D = %PlayerAnimation
+@onready var health_bar: ProgressBar = %HealthBar
+@onready var hit_sound: AudioStreamPlayer = %HitSound
+@onready var jump_sound: AudioStreamPlayer = %JumpSound
+
 
 func _ready() -> void:
-	health = 100
-	health_bar.init_health(health)
-	game_over_label.visible = false
-	dark_overlay.visible = false
-	is_dead = false
+	pass
 
 func _process(delta: float) -> void:
-	if is_dead:
+	if Global.inputs_frozen:
 		return
 		
 	if Input.is_action_pressed("right"):
@@ -42,27 +39,8 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("jump") and is_on_ground:
 		velocity.y = jump_force
 		player_animation.play("jump")
-		$JumpSound.play()
+		jump_sound.play()
 		is_jumping = true
-
-	# Testing health decrease with the "H" key
-	if Input.is_action_just_pressed("H"):
-		is_hit = true
-		health -= 10
-		var timer2 = Timer.new()
-		timer2.wait_time = 0.2
-		timer2.one_shot = true
-		timer2.connect("timeout", Callable(self, "_on_timeout2"))  # Use Callable for connecting signals
-		add_child(timer2)
-		timer2.start()
-		health_bar._set_health(health)
-		player_animation.play("hit")
-		$HitSound.play()
-
-	# Check if health is 0 or below
-	if health <= 0:
-
-		show_game_over()
 
 	# Apply gravity
 	velocity.y += gravity * delta
@@ -80,29 +58,17 @@ func _process(delta: float) -> void:
 		is_on_ground = false
 	
 
-func show_game_over() -> void:
-	is_dead = true
-	health = 1
-	# Show the dark overlay and game over label
-	dark_overlay.visible = true
-	game_over_label.visible = true
-	$DieSound.play()
+func apply_hit() -> void:
+	is_hit = true
+	player_animation.play("hit")
+	hit_sound.play()
 
-	# Optionally, add fade-in effect or animation to the label here
-	# Example: game_over_label.modulate.a = 0 and animate to 1
-
-	# Start a timer to restart the game after 2 seconds
-	var timer = Timer.new()
-	timer.wait_time = 2.0
-	timer.one_shot = true
-	timer.connect("timeout", Callable(self, "_on_timeout"))  # Use Callable for connecting signals
-	add_child(timer)
-	timer.start()
-	
-	
-
-func _on_timeout() -> void:
-	get_tree().reload_current_scene()
+	var timer2 = Timer.new()
+	timer2.wait_time = 0.2
+	timer2.one_shot = true
+	timer2.connect("timeout", Callable(self, "_on_timeout2"))  # Use Callable for connecting signals
+	add_child(timer2)
+	timer2.start()
 
 func _on_timeout2() -> void:
 	is_hit = false

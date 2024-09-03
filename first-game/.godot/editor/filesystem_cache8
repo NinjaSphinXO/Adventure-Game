@@ -1,8 +1,9 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1725291890
+::res://::1725361998
 icon.svg::CompressedTexture2D::687537331386455341::1725283068::1725283143::1::::<><>::
-::res://Background/::1725283144
+::res://Background/::1725361998
 BG.jpg::CompressedTexture2D::55362376516304851::1725283068::1725283144::1::::<><>::
+TileMap.png::CompressedTexture2D::4006409110110297855::1725361980::1725361998::1::::<><>::
 ::res://Main Characters/::1725291657
 Appearing (96x96).png::CompressedTexture2D::7080184839926108901::1725283068::1725283144::1::::<><>::
 Desappearing (96x96).png::CompressedTexture2D::3566228940981585281::1725283068::1725283144::1::::<><>::
@@ -38,12 +39,12 @@ Idle (32x32).png::CompressedTexture2D::5659367139540776945::1725283068::17252831
 Jump (32x32).png::CompressedTexture2D::5801177295638900885::1725283068::1725283144::1::::<><>::
 Run (32x32).png::CompressedTexture2D::9209289154442241793::1725283068::1725283144::1::::<><>::
 Wall Jump (32x32).png::CompressedTexture2D::2245796137180024908::1725283068::1725283144::1::::<><>::
-::res://Scenes/::1725291738
+::res://Scenes/::1725292246
 health_bar.gd::GDScript::-1::1725287470::0::1::::<>ProgressBar<>::
-level.tscn::PackedScene::1556310044338932737::1725291738::0::1::::<><>::uid://122swf3a0xb::::res://Background/BG.jpg<>uid://d1nof71rgomqi::::res://Scenes/player.tscn
-player.gd::GDScript::-1::1725291710::0::1::::<>Node2D<>::
-player.tscn::PackedScene::9011869585032281544::1725291738::0::1::::<><>::res://Scenes/player.gd<>res://Scenes/health_bar.gd<>uid://ddxgwgq6jjv1l::::res://Main Characters/Ninja Frog/Idle (32x32).png<>uid://cjqfbq5kut7x5::::res://Sounds/jump.mp3<>uid://bbrug10qobekl::::res://Main Characters/Ninja Frog/Run (32x32).png<>uid://43k6uyrswa53::::res://Sounds/hit.wav<>uid://dht2kfqfj4qwv::::res://Sounds/die.wav<>uid://ddxusyr8bctv4::::res://Main Characters/Ninja Frog/Jump (32x32).png
-::res://Sounds/::1725291665
+level.tscn::PackedScene::1556310044338932737::1725292234::0::1::::<><>::uid://122swf3a0xb::::res://Background/BG.jpg<>uid://d1nof71rgomqi::::res://Scenes/player.tscn
+player.gd::GDScript::-1::1725292234::0::1::::<>Node2D<>::
+player.tscn::PackedScene::9011869585032281544::1725292246::0::1::::<><>::res://Scenes/player.gd<>res://Scenes/health_bar.gd<>uid://b3g7g6f1yrdfw::::res://Main Characters/Ninja Frog/Hit (32x32).png<>uid://ddxgwgq6jjv1l::::res://Main Characters/Ninja Frog/Idle (32x32).png<>uid://cjqfbq5kut7x5::::res://Sounds/jump.mp3<>uid://bbrug10qobekl::::res://Main Characters/Ninja Frog/Run (32x32).png<>uid://43k6uyrswa53::::res://Sounds/hit.wav<>uid://dht2kfqfj4qwv::::res://Sounds/die.wav<>uid://ddxusyr8bctv4::::res://Main Characters/Ninja Frog/Jump (32x32).png
+::res://Sounds/::1725361983
 die.wav::AudioStreamWAV::7691464638190393689::1725289512::1725291665::1::::<><>::
 hit.wav::AudioStreamWAV::2093942660494960136::1725289145::1725289176::1::::<><>::
 jump.mp3::AudioStreamMP3::5437877262150787524::1725283068::1725283143::1::::<><>::
